@@ -1,0 +1,79 @@
+#!/bin/bash
+# chkconfig: 345 99 99
+
+. /etc/init.d/functions
+
+
+USER="node"
+GROUP="www"
+
+DAEMON="/usr/bin/pm2"
+ROOT_DIR="/srv/gd_jackpot"
+SERVER="gd_jackpot"
+
+REST_SERVER="${ROOT_DIR}/pm2_config.json"
+LOCK_FILE="/var/lock/gd_jackpot"
+export NODE_ENV=${NODE_ENV:="production"}
+
+do_start()
+{
+        if [ ! -f "$LOCK_FILE" ] ; then
+                echo -n $"Starting $SERVER: "
+                if [[ $(whoami) != "$USER"  ]]; then
+                        runuser -l "$USER" -g "$GROUP" -c "NODE_ENV='production' $DAEMON start $REST_SERVER" && echo_success || echo_failure
+                else
+                        if [[ "$DAEMON start $REST_SERVER" ]]; then
+                                echo_success
+                        else
+                                echo_failure
+                        fi
+                fi
+                RETVAL=$?
+                echo
+                [ $RETVAL -eq 0 ] && touch $LOCK_FILE
+        else
+                echo "$SERVER is locked."
+                RETVAL=1
+        fi
+
+}
+
+do_stop()
+{
+        echo -n $"Stopping $SERVER: "
+        if [[ $(whoami) != "$USER"  ]]; then
+                runuser -l "$USER" -c "$DAEMON kill"
+        else
+                $DAEMON kill
+        fi
+        RETVAL=$?
+        echo  [ $RETVAL -eq 0 ] && rm -f $LOCK_FILE
+}
+
+status()
+{
+        echo "Status for $SERVER:"
+        $DAEMON list
+                RETVAL=$?
+}
+case "$1" in
+        start)
+                do_start
+                ;;
+        stop)
+                do_stop
+                ;;
+        restart)
+                do_stop
+                $DAEMON ping
+                do_start
+                ;;
+        status)
+                status
+        ;;
+        *)
+                echo "Usage: $0 {start|stop|status|restart}"
+                RETVAL=1
+esac
+
+exit $RETVAL

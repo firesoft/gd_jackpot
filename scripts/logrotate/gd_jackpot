@@ -1,0 +1,14 @@
+/var/log/gd_jackpot/*.log {
+	daily
+	rotate 14
+	missingok
+	notifempty
+	compress
+	sharedscripts
+	copytruncate
+	dateext
+	dateformat %Y-%m-%d
+	postrotate
+		/usr/bin/pm2 reloadLogs
+	endscript
+}

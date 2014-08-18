@@ -1,0 +1,13 @@
+[{
+	"name": "gd_jackpot",
+	"script": "/srv/gd_jackpot/app.js",
+	"cwd": "/srv/gd_jackpot",
+	"error_file": "/var/log/gd_jackpot/gd_jackpot-err.log",
+	"out_file": "/var/log/gd_jackpot/gd_jackpot-out.log",
+	"exec_mode": "cluster_mode",
+	"env": {
+		"NODE_ENV": "production"
+	},
+	"run_as_user": "node",
+	"run_as_group": "www"
+}]
