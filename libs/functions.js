@@ -82,6 +82,11 @@ function isEmpty(value) {
 	return false;
 }
 
+function isPositive(value) {
+	value = parseFloat(value);
+	return (value !== NaN && value > 0);
+}
+
 module.exports.getEnv = getEnv;
 module.exports.isProductionEnv = isProductionEnv;
 module.exports.getTimestamp = getTimestamp;
@@ -92,3 +97,4 @@ module.exports.clone = clone;
 module.exports.toInt = toInt;
 module.exports.packToArray = packToArray;
 module.exports.isEmpty = isEmpty;
+module.exports.isPositive = isPositive;

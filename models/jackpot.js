@@ -21,6 +21,13 @@ var jackpotKeys = {
 	badbeat: 'poker_current_badbeat_jackpot_game_chips'
 };
 
+function get(type, callback) {
+	getAll(function(err, jackpotData) {
+		if (err) return callback(err, null);
+		callback(null, jackpotData[type]);
+	});
+}
+
 function getAll(callback) {
 	var jackpotData = getFromCache();
 	if (jackpotData) {
@@ -32,6 +39,10 @@ function getAll(callback) {
 		putToCache(jackpotData);
 		callback(null, jackpotData);
 	})
+}
+
+function isTypeValid(type) {
+	return jackpotKeys.hasOwnProperty(type);
 }
 
 function getFromDB(callback) {
@@ -78,4 +89,6 @@ function putToCache(jackpots) {
 	memoryCache.put(getCacheKey(), jackpots, 10 * 60 * 1000);
 }
 
+module.exports.get = get;
 module.exports.getAll = getAll;
+module.exports.isTypeValid = isTypeValid;

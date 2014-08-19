@@ -30,17 +30,15 @@ function checkValidationErrors(req) {
 	return null;
 }
 
-function extendExpressValidator() {
-	expressValidator.validator.extend('isPositive', function (value) {
-		value = parseFloat(value);
-		return (value !== NaN && value > 0);
-	});
+function extendExpressValidator(name, func) {
+	expressValidator.validator.extend(name, func);
 }
 
-extendExpressValidator();
+extendExpressValidator('isPositive', functions.isPositive);
 
 module.exports.checkValidationErrors = checkValidationErrors;
 module.exports.sanitizeToInt = sanitizeParamsToInt;
 module.exports.sanitizeParamsToInt = sanitizeParamsToInt;
 module.exports.sanitizeParamToArrayOfInts = sanitizeParamToArrayOfInts;
 module.exports.compactParamArray = compactParamArray;
+module.exports.extendExpressValidator = extendExpressValidator;
