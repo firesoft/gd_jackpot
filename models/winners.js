@@ -21,7 +21,7 @@ function get(type, limit, callback) {
 		if (err) return callback(err, null);
 		putToCache(type, limit, winners);
 		callback(null, winners);
-	})
+	});
 }
 
 function getFromDB(type, limit, callback) {

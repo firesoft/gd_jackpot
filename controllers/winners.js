@@ -9,7 +9,7 @@ function get(req, res, next) {
 	var type = req.parsedData.type;
 	var model = getModel(type);
 	model.get(req.parsedData.type, req.parsedData.limit, function(err, winners) {
-		if (err) return callback(err, null);
+		if (err) return next(err, null);
 		res.json(winners);
 	});
 }
@@ -32,11 +32,21 @@ function validate(req, res, next) {
 	if (err) return next(err); 
 	
 	req.sanitize('limit').toInt();
+	var limit = applyMaxLimit(req.params.type, req.query.limit);
 	
 	req.parsedData = {};
 	req.parsedData.type = req.params.type;
-	req.parsedData.limit = req.query.limit;
+	req.parsedData.limit = limit;
+	
 	next();
+}
+
+function applyMaxLimit(type, limit) {
+	var maxLimit = 30;
+	if (type == 'badbeat') {
+		maxLimit = 10;
+	}
+	return Math.max(limit, maxLimit);
 }
 
 gdValidationHelper.extendExpressValidator('isTypeValid', jackpotModel.isTypeValid);
