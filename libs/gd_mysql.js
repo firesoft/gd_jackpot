@@ -12,9 +12,9 @@ function gdMysql() {
 	};
 	
 	this.query = function(query, connName, callback) {
-		poolCluster.getConnection(connName, function (err, connection) {
+		poolCluster.getConnection(connName, function(err, connection) {
 			if (err) return callback(err, null);
-			connection.query(query, function (err, result) {
+			connection.query(query, function(err, result) {
 				connection.release();
 				callback(err, result);
 			});
