@@ -50,9 +50,9 @@ example for type=badbeat
 in case of error service will return one of the following errors (with http status):
 
  * status 404 - not found
-```
+ ```
  {"message":"four - oh - four"}
-```
+ ```
 
  * status 400 - bad request - in case of incorrect parameters
  ```
