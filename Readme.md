@@ -6,14 +6,13 @@ Jackpot service - returns info about jackpot values, rules and winners in json f
 ### Routes:
 
 ##### GET / - service info
-
-return info about service, example:
+return info about service, return example:
 ```
 {"status":"online","name":"gd_jackpot","ip":"0.0.0.0","port":8088,"startTime":1408812425}
 ```
 
 ##### GET /jackpot - list of available jackpots values
-example:
+return example:
 ```
 {"bingo":"1871234","videopoker":"98657","slots":0,"blackjack":0,"poker":0,"badbeat":0}
 ```
@@ -24,17 +23,17 @@ example:
 ```
  
 ##### GET /winners/:TYPE - list of jackpot winners, query param: limit (def: 30)
-example:
+return example:
 ```
 [{"playerId":66,"timeAwarded":1408556144,"gameNumber":3000,"cards":"sjdhf8","moneyWon":12894},{"playerId":78,"timeAwarded":1408556144,"gameNumber":3001,"cards":"woief","moneyWon":92837}]
 ```
 ##### GET /rules/:TYPE - list of rules for jackpot
-example for type=poker
+return example for type=poker
 ```
 {"minimalCards":[{"gameNumber":3000,"cards":"2asd34"},{"gameNumber":3001,"cards":"24ksjdhf2"},{"gameNumber":3006,"cards":"zxczxczxc"}]}
 ``` 
 
-example for type=slots
+return example for type=slots
 ```
 {"percentRules":[{"cost":10,"percent":20},{"cost":100,"percent":40},{"cost":1000,"percent":80}]}
 ```
@@ -49,9 +48,10 @@ example for type=badbeat
 
 ##### errors
 in case of error service will return one of the following errors (with http status):
+
  * status 404 - not found
 ```
-{"message":"four - oh - four"}
+ {"message":"four - oh - four"}
 ```
 
  * status 400 - bad request - in case of incorrect parameters
@@ -61,5 +61,5 @@ in case of error service will return one of the following errors (with http stat
  
  * status 500 - internal service error
  ```
-{"message":"Internal server error."}
+ {"message":"Internal server error."}
  ```
