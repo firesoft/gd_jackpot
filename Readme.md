@@ -1,11 +1,7 @@
-GD Jackpot Service
-=======================
+GD Jackpot Service - api specs
+---
 
-
-Api specs
----------
-
-h3. GET / - service info
+##### GET / - service info
 
  - GET /jackpot - list of available jackpots values
  - GET /jackpot/:TYPE - jackpot value
