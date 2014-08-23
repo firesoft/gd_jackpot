@@ -42,6 +42,14 @@ example for type=badbeat
 {"percentRules":[{"prizeType":"loser","percent":50},{"prizeType":"winner","percent":25},{"prizeType":"participant","percent":25}],"minimalCards":"ppppppppppp"}
 ```
 
-:TYPE - one of [bingo, slots, videopoker, blackjack, poker, badbeat]
+##### TYPE param
+:TYPE - type parameter is one of [bingo, slots, videopoker, blackjack, poker, badbeat]
+
+##### errors
+in case of error service will return one of the following errors (http status):
+ * 404 - route not found
+```
+{"message":"four - oh - four"}
+```
 
 
