@@ -1,6 +1,8 @@
 GD Jackpot Service - api specs
 ---
 
+Jackpot service - returns info about jackpot values, rules and winners in json format using http protocol.
+
 ### Routes:
 
 ##### GET / - service info
@@ -46,10 +48,18 @@ example for type=badbeat
 :TYPE - type parameter is one of [bingo, slots, videopoker, blackjack, poker, badbeat]
 
 ##### errors
-in case of error service will return one of the following errors (http status):
- * 404 - route not found
+in case of error service will return one of the following errors (with http status):
+ * status 404 - not found
 ```
 {"message":"four - oh - four"}
 ```
 
-
+ * status 400 - bad request - in case of incorrect parameters
+ ```
+ {"message":"Invalid type param."}
+ ```
+ 
+ * status 500 - internal service error
+ ```
+{"message":"Internal server error."}
+ ```
