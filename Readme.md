@@ -1,6 +1,8 @@
 GD Jackpot Service - api specs
 ---
 
+### Routes
+
 ##### GET / - service info
 
  - GET /jackpot - list of available jackpots values
