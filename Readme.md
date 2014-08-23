@@ -38,7 +38,7 @@ return example for type=slots
 {"percentRules":[{"cost":10,"percent":20},{"cost":100,"percent":40},{"cost":1000,"percent":80}]}
 ```
 
-example for type=badbeat
+return example for type=badbeat
 ```
 {"percentRules":[{"prizeType":"loser","percent":50},{"prizeType":"winner","percent":25},{"prizeType":"participant","percent":25}],"minimalCards":"ppppppppppp"}
 ```
